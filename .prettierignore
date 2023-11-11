@@ -1,0 +1,8 @@
+.eslintcache
+.vscode
+ancient_assets
+assets
+baked-assets
+node_modules
+src/imports/ASSETS_TO_IMPORT.ts
+src/imports/SPRITES.ts

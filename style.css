@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300;400;600&family=Tilt+Neon&display=swap');
+
+:root {
+  --padding-small: 2%;
+  --padding-medium: 10%;
+
+  --gap: min(1.5vw, 1.5vh);
+
+  --board-side: min(90vw, 60vh);
+
+  --aspect-ratio-square: 1;
+
+  --main-background-color: #646464;
+
+  --main-font: 'MuseoModerno', sans-serif;
+  --accent-font: 'Tilt Neon', sans-serif;
+
+  --text-color: #f5f5f5;
+  --text-color-lighter: #ffffff;
+
+  --accent-pink: #ff69b4;
+  --accent-blue: #6495ed;
+
+  --accent-gray: #a5a5a5;
+
+  --accent-black: #000000;
+  --accent-transparant: transparent;
+
+  --color-mix-players: color-mix(in lch, var(--accent-blue) 50%, var(--accent-pink) 50%);
+
+  --transparent-black: color-mix(in srgb, var(--accent-black) 50%, var(--accent-transparant) 50%);
+
+  --shadow-inner: inset 1px 1px 1px var(--text-color-lighter);
+  --shadow-outer-small: 5px 5px 10px var(--transparent-black);
+  --shadow-outer-medium: 10px 10px 20px var(--transparent-black);
+  --accent-shadow: 0 0 40px 20px var(--color-mix-players);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-size: calc(15px + 0.390625vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: var(--main-background-color);
+  font-family: var(--main-font);
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+.header,
+.main,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.header,
+.footer {
+  height: clamp(3rem, 100px, 15vh);
+}
+
+.main {
+  height: calc(var(--board-side) + var(--padding-medium));
+}
+
+.col-1,
+.col-2,
+.col-3 {
+  display: flex;
+  gap: var(--gap);
+  width: 100%;
+  height: 100%;
+}
+
+/* Game Board / Square Container */
+.game-board {
+  display: flex;
+  flex-direction: column;
+  height: var(--board-side);
+  width: var(--board-side);
+  align-items: center;
+  background-color: var(--accent-gray);
+  border-radius: var(--gap);
+  box-shadow: var(--shadow-inner), var(--shadow-outer-medium);
+  aspect-ratio: var(--aspect-ratio-square);
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+/* Game Board Tile/ Square */
+.square {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: calc(var(--gap) * 2.5);
+  background-color: var(--text-color);
+  box-shadow: var(--shadow-inner), var(--shadow-outer-small);
+  aspect-ratio: var(--aspect-ratio-square);
+  width: 100%;
+  height: 100%;
+}
+
+/* Scoreboard */
+.score-board {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-inline: var(--padding-medium);
+  width: 100%;
+}
+
+/* Text Display */
+.info-display {
+  text-align: center;
+  width: 100%;
+}
+
+/* scoreboard X, O/ player score */
+.cross-score,
+.circle-score {
+  max-width: 100%;
+  min-width: 30vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--transparent-black);
+  border-radius: 20px;
+  margin: auto;
+}
+
+.cross-score {
+  padding-inline-start: var(--padding-small);
+}
+
+.circle-score {
+  padding-inline-end: var(--padding-small);
+}
+
+.cross-score::after {
+  content: 'X';
+  color: var(--accent-blue);
+  text-shadow: 1px 1px 2px rgb(65, 65, 255);
+  border-radius: 50px 0 0 50px;
+  box-shadow: -5px 0 0 3px var(--main-background-color);
+}
+
+.circle-score::before {
+  content: 'O';
+  color: var(--accent-pink);
+  text-shadow: 1px 1px 2px rgb(255, 20, 147);
+  border-radius: 0 50px 50px 0;
+  box-shadow: 5px 0 0 3px var(--main-background-color);
+}
+
+.cross-score::after,
+.circle-score::before {
+  font-family: var(--accent-font);
+  background-color: var(--main-background-color);
+}
+
+/* New Game Button */
+
+.new-game-button {
+  all: unset;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--accent-font);
+  background-color: var(--transparent-black);
+  border-radius: 10px;
+  box-shadow: var(--shadow-outer-medium);
+  padding: var(--gap);
+  width: calc(var(--board-side) / 2);
+  color: var(--text-color-lighter);
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
+}
+
+.new-game-button:hover {
+  box-shadow: var(--shadow-inner), var(--accent-shadow);
+  filter: saturate(120%) contrast(110%);
+  transition-timing-function: ease-in;
+  transition-duration: 50ms;
+}
+
+.new-game-button:active {
+  box-shadow:
+    var(--accent-shadow),
+    inset 1px 1px 2px 1px rgba(231, 231, 231, 0.2),
+    var(--shadow-inner);
+  transition-timing-function: ease-out;
+  transition-duration: 100ms;
+}
+
+.new-game-button:hover,
+.new-game-button:active {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Player-Symbols and Hover Effects */
+.circle,
+.circle-hover {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  position: relative;
+  top: 0%;
+  left: 0%;
+}
+
+.cross-hover,
+.cross {
+  display: flex;
+  width: 80%;
+  height: 80%;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.cross-hover::before,
+.cross-hover::after,
+.cross::before,
+.cross::after {
+  content: '';
+  position: absolute;
+  border-radius: 5px;
+  transform: translateX(-50%);
+}
+
+.cross-hover::before,
+.cross::before {
+  left: 50%;
+  width: 20%;
+  height: 100%;
+}
+
+.cross-hover::after,
+.cross::after {
+  top: 50%;
+  height: 20%;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.circle::after,
+.circle-hover::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background-color: var(--text-color);
+}
+
+/* player colors */
+/* ! hover effect colors (don't move!) */
+.circle-hover {
+  background-color: rgb(255, 192, 203);
+}
+
+.cross-hover::before,
+.cross-hover::after {
+  background-color: rgb(173, 216, 230);
+}
+
+/* ! marker colors👇 (must be below hover effect colors) */
+.cross::before,
+.cross::after {
+  background-color: var(--accent-blue);
+}
+
+.circle {
+  background-color: var(--accent-pink);
+}
+
+.cross,
+.circle {
+  filter: saturate(98%);
+}
+
+.blur {
+  filter: blur(3px);
+  pointer-events: none;
+}

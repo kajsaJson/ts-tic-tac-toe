@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "@types/node": "20.8.7",
+    "@typescript-eslint/eslint-plugin": "6.8.0",
+    "@typescript-eslint/parser": "6.8.0",
+    "@typescript/lib-dom": "npm:@types/web@0.0.118",
+    "eslint": "8.52.0",
+    "eslint-plugin-unicorn": "48.0.1",
+    "prettier": "3.0.3",
+    "prettier-plugin-jsdoc": "1.1.1",
+    "prettier-plugin-organize-imports": "3.2.3",
+    "ts-prune": "0.10.3",
+    "typescript": "5.2.2",
+    "vite": "4.5.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "fmt": "prettier --cache --cache-strategy metadata --ignore-unknown --no-error-on-unmatched-pattern --write \"./src/**\"",
+    "lint": "eslint --cache --exit-on-fatal-error --ext .d.ts,.mjs,.ts --no-error-on-unmatched-pattern --report-unused-disable-directives \"./src/**\"",
+    "lint:fix": "eslint --cache --exit-on-fatal-error --ext .d.ts,.mjs,.ts --fix --no-error-on-unmatched-pattern --report-unused-disable-directives \"./src/**\"",
+    "nuke": "node -e \"import(`node:fs/promises`).then(({ rm }) => Promise.all([`node_modules`, `pnpm-lock.yaml`].map((path) => rm(path, { force: true, recursive: true }))));\"",
+    "reinstall": "pnpm nuke && pnpm store prune && pnpm i -g pnpm && pnpm update -g -L && pnpm i && pnpm update -L",
+    "start": "vite",
+    "tidy": "pnpm lint:fix && pnpm fmt"
+  },
+  "type": "module"
+}
